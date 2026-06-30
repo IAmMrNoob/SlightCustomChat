@@ -2,8 +2,7 @@ loadstring(game:HttpGet(('https://raw.githubusercontent.com/IAmMrNoob/RFE/main/N
 local screenGui = Instance.new("ScreenGui", gethui())
 local assetpaths = {}
 function addIcons(Name, imgSrclink)
-	if not isfolder("SlightCustomChat") then
-		makefolder("SlightCustomChat")
+	if not isfolder("SlightCustomChat/Icons") then
 		makefolder("SlightCustomChat/Icons")
 	end
 	if not isfile("SlightCustomChat/Icons/"..Name .. ".png") then
@@ -50,7 +49,7 @@ function addThingTheming(ui, cat)
 	table.insert(theming[prop], ui)
 	return ui
 end
-local settings = {
+local uiSettings = {
     cRate = 0.15,
     Theming = {
         Font = "Cartoon",
@@ -460,14 +459,14 @@ function AddMessage(textmessage)
 	Message_Border.Transparency = .95
 	Message_Border.Color = Color3.new(1, 1, 1)
 	Message_Border.ApplyStrokeMode = "Border"
-    return Message_Corner
+    return Message
 end
 function setTheme(color, labelColor, textColor, placeholderColor, themefont)
-    color = color or Color3.fromRGB(unpack(settings.Theming.Main))
-    labelColor = labelColor or Color3.fromRGB(unpack(settings.Theming.Text))
-    textColor = textColor or Color3.fromRGB(unpack(settings.Theming.Text))
-    placeholderColor = placeholderColor or Color3.fromRGB(unpack(settings.Theming.PlaceHolder))
-    themefont  = themefont or Enum.Font[settings.Theming.Font]
+    color = color or Color3.fromRGB(unpack(uiSettings.Theming.Main))
+    labelColor = labelColor or Color3.fromRGB(unpack(uiSettings.Theming.Text))
+    textColor = textColor or Color3.fromRGB(unpack(uiSettings.Theming.Text))
+    placeholderColor = placeholderColor or Color3.fromRGB(unpack(uiSettings.Theming.PlaceHolder))
+    themefont  = themefont or Enum.Font[uiSettings.Theming.Font]
 	local h, s, v = color:ToHSV()
 	if v*255 > 80 then
 		CloseButton.Image = getcustomasset(assetpaths["close_"])
@@ -1198,4 +1197,4 @@ do
     end
 end
 
-return bigSidebar,{SettingsButton,ThemesButton,UsersButton,SendButton,TextBox},setTheme,AddMessage,settings
+return bigSidebar,{SettingsButton,ThemesButton,UsersButton,SendButton,TextBox},setTheme,AddMessage,uiSettings

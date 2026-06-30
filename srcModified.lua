@@ -328,6 +328,7 @@ checkChannel.addListener(function(plr,Data1,Data2)
 end)
 
 local SendRecieveChannels = {}
+SendRecieveChannels.cRate = 0.15
 SendRecieveChannels.InUse = {}
 SendRecieveChannels.srC = {}
 function SendRecieveChannels.Create(id) -- id in a way as im gonna be trying to make a channel for sending and recieving info like a queue in a way
@@ -373,7 +374,7 @@ function SendRecieveChannels.Create(id) -- id in a way as im gonna be trying to 
     SendRecieveChannels.srC[id] = returnValue
 end
 
-function SendRecieveChannels.send(str)
+function SendRecieveChannels.send(str,progressCallback)
     if SendRecieveChannels.Callback == nil then
         return "Needs to have callback function to send or recieve"
     end
@@ -394,12 +395,13 @@ function SendRecieveChannels.send(str)
             local x = game.Players.LocalPlayer:GetNetworkPing()*1.16
             print(roundNumber(x,3))
             ]]
-            local wT = 0.15 ----0.04 the least i could get it at b4 it js stops listening or what ever
+            local wT = SendRecieveChannels.cRate ----0.04 the least i could get it at b4 it js stops listening or what ever
             mod.Runtime.db = true
             task.wait(wT)
             SendRecieveChannels.srC[UsableChannelID].setStart()
             task.wait(wT)
             for order, data in pairs(dataset) do
+                progressCallback(order,#dataset)
                 SendRecieveChannels.srC[UsableChannelID].Put(data,order)
                 task.wait(wT)
             end
