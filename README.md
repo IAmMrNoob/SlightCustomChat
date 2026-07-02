@@ -9,6 +9,6 @@ optimally its better to send one message at a time
 
 # Script loadstring
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/IAmMrNoob/SlightCustomChat/refs/heads/main/Main.lua"), true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/IAmMrNoob/SlightCustomChat/refs/heads/main/Main.lua", true))()
 ```
 
